@@ -170,3 +170,23 @@ flag_extractor_cli/
 # Project planning documents
 PROJECT_KICKOFF.cs.md
 PROJECT_KICKOFF.en.md
+
+# === CUSTOM APP EXCLUSIONS ===
+# Build artifacts and installers
+*.exe
+build/
+dist/
+*.msi
+*.dmg
+
+# Large binary files
+*.sl2
+*.ct
+compare/
+ER_Cheat/
+
+# Backup files
+assets/backup/
+
+# Claude settings
+.claude/

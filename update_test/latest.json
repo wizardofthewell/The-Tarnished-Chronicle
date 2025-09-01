@@ -1,0 +1,8 @@
+{
+  "version": "2.0.0",
+  "url": "http://localhost:8000/ER_Boss_Checklist_Setup.exe",
+  "sha256": "b400d1147bd22eacf4fcf54173e8bebce933805a103448e63725b24699dd7dcb",
+  "notes": "- Added new feature X.\n- Fixed bug Y.\n- Improved performance.",
+  "force": false,
+  "published_at": "2025-08-09T12:00:00Z"
+}
