@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![App Logo](assets/icons/app_logo.ico)
+![App Logo](assets/icons/logo.png)
 
 **The ultimate boss tracking companion for Elden Ring**
 
@@ -168,6 +168,21 @@ The application includes automatic update checking. You'll be notified when new 
 ### Recent Updates
 - **v1.0.1** - UI improvements, better settings panel management, scrollable OBS panel
 - **v1.0.0** - Initial release with core functionality
+
+### 🔮 Planned Features (Future Updates)
+
+If the application gains community traction and success, planned features include:
+
+- **👥 Friends Comparison** - Compare your boss completion stats with friends
+- **⏱️ Speedrun Tracking** - Time tracking for speedrun attempts and personal bests
+- **📊 Advanced Statistics** - Detailed analytics of your gameplay patterns and progress
+- **🏆 Community Leaderboards** - Compare completion times and achievements globally
+- **📈 Progress Visualization** - Charts and graphs showing your improvement over time
+- **🎯 Challenge Modes** - Special tracking modes for no-death runs, SL1 runs, etc.
+- **💾 Cloud Sync** - Backup and sync your progress across multiple devices
+- **🎮 Multiple Character Comparison** - Side-by-side stats for all your characters
+
+*These features will be prioritized based on community feedback and application usage.*
 
 ---
 
