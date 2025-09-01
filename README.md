@@ -8,7 +8,7 @@
 
 [![Latest Release](https://img.shields.io/github/v/release/RysanekDavid/The-Tarnished-Chronicle?style=for-the-badge)](https://github.com/RysanekDavid/The-Tarnished-Chronicle/releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/RysanekDavid/The-Tarnished-Chronicle/total?style=for-the-badge)](https://github.com/RysanekDavid/The-Tarnished-Chronicle/releases)
-[![License](https://img.shields.io/github/license/RysanekDavid/The-Tarnished-Chronicle?style=for-the-badge)](LICENSE)
+[![License](https://img.shields.io/github/license/RysanekDavid/The-Tarnished-Chronicle?style=for-the-badge&v=1)](LICENSE)
 
 </div>
 
