@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![App Logo](assets/icons/logo.png)
+![App Logo](https://raw.githubusercontent.com/RysanekDavid/ER_Boss_Checklist/main/assets/icons/app_logo.png)
 
 **The ultimate boss tracking companion for Elden Ring**
 
@@ -27,7 +27,6 @@
 - **🎮 Live Overlay** - In-game overlay showing your current progress
 - **📹 OBS Integration** - Export stats to text files for streaming setups
 - **🔄 Auto-Updates** - Automatic update notifications and installation
-- **🎨 Dark Theme UI** - Sleek, modern interface that's easy on the eyes
 
 ---
 
@@ -51,30 +50,35 @@
 ## 📋 Features Deep Dive
 
 ### 🎯 Boss Tracking
+
 - **Automatic Detection**: Monitors your save file for newly defeated bosses
 - **Manual Marking**: Click checkboxes to manually mark bosses as defeated
 - **Detailed Info**: Click boss names to see stats, death count, and kill timestamps
 - **Search Function**: Quickly find specific bosses or locations
 
 ### 📊 Statistics
+
 - **Boss Counter**: Track defeated bosses vs. total available
 - **Death Tracking**: Monitor deaths per boss and overall
 - **Playtime**: Real-time and total playtime tracking
 - **Progress Percentage**: Visual completion indicators
 
 ### 🎮 Live Overlay
+
 - **Customizable Display**: Show/hide different stats (bosses, deaths, time, last boss killed)
 - **Color Customization**: Choose your preferred text color
 - **Font Size Options**: Adjust overlay text size (10-30pt)
 - **Always on Top**: Overlay stays visible while gaming
 
 ### 📹 OBS Integration
+
 - **Text File Export**: Exports stats to `.txt` files for OBS text sources
 - **Customizable Formats**: Define your own text formats for each stat
 - **Real-time Updates**: Files update automatically as you play
 - **Stream-Ready**: Perfect for livestreaming your Elden Ring runs
 
-### 🎨 Content Filtering
+### 🔄 Content Filtering
+
 - **Base Game/DLC**: Filter to show only base game or DLC content
 - **Hide Defeated**: Option to hide already completed bosses
 - **Location Search**: Find bosses by location or name
@@ -84,6 +88,7 @@
 ## 🔧 Configuration
 
 ### Overlay Settings
+
 - **Toggle Overlay**: Enable/disable the in-game overlay
 - **Display Options**: Choose which information to show
   - Boss counter
@@ -93,6 +98,7 @@
 - **Appearance**: Customize text color and font size
 
 ### OBS Integration Setup
+
 1. **Enable OBS Output** - Toggle the OBS file generation
 2. **Set Output Folder** - Choose where to save the text files
 3. **Configure Files**:
@@ -103,6 +109,7 @@
 4. **Custom Formats** - Define your own text templates using placeholders
 
 ### Advanced Features
+
 - **Death Counter Reset**: Reset OBS death counter without affecting actual stats
 - **Character Switching**: Switch between different character saves
 - **Auto-Updates**: Automatically check for and install new versions
@@ -130,21 +137,25 @@
 ### Common Issues
 
 **App doesn't detect save file:**
+
 - Ensure Elden Ring is installed and has been launched at least once
 - Verify the save file path in Windows Explorer
 - Try running the app as administrator
 
 **Overlay not showing:**
+
 - Check if overlay is enabled in settings
 - Ensure the game is running in windowed or borderless mode
 - Try toggling the overlay on/off
 
 **OBS files not updating:**
+
 - Verify the output folder path is correct
 - Check that OBS file generation is enabled
 - Ensure the files aren't being used by another application
 
 **Performance issues:**
+
 - Close unnecessary applications
 - Reduce overlay refresh rate if experiencing frame drops
 - Consider disabling real-time monitoring if on older hardware
@@ -152,6 +163,7 @@
 ### Getting Help
 
 If you encounter issues not covered here:
+
 1. Check [existing issues](https://github.com/RysanekDavid/ER_Boss_Checklist/issues)
 2. Create a [new issue](https://github.com/RysanekDavid/ER_Boss_Checklist/issues/new) with:
    - Detailed description of the problem
@@ -166,6 +178,7 @@ If you encounter issues not covered here:
 The application includes automatic update checking. You'll be notified when new versions are available with detailed changelogs and the option to download and install updates automatically.
 
 ### Recent Updates
+
 - **v1.0.1** - UI improvements, better settings panel management, scrollable OBS panel
 - **v1.0.0** - Initial release with core functionality
 
@@ -182,18 +195,32 @@ If the application gains community traction and success, planned features includ
 - **💾 Cloud Sync** - Backup and sync your progress across multiple devices
 - **🎮 Multiple Character Comparison** - Side-by-side stats for all your characters
 
-*These features will be prioritized based on community feedback and application usage.*
+_These features will be prioritized based on community feedback and application usage._
 
 ---
 
-## 🤝 Contributing
+## 🤝 Feedback & Bug Reports
 
-Contributions are welcome! Whether it's bug reports, feature requests, or code contributions:
+**feedback and bug reports are highly welcomed!**
 
-1. **Fork** the repository
-2. **Create** a feature branch
-3. **Make** your changes
-4. **Submit** a pull request
+### 🐛 Bug Reports
+
+Found a bug? Please report it:
+
+1. **Check [existing issues](https://github.com/RysanekDavid/ER_Boss_Checklist/issues)** to avoid duplicates
+2. **Create a [new issue](https://github.com/RysanekDavid/ER_Boss_Checklist/issues/new)** with:
+   - Detailed description of the problem
+   - Steps to reproduce the issue
+   - Your system specifications
+   - Screenshots if applicable
+
+### 💡 Feature Requests
+
+Have an idea for a new feature? I'd love to hear it! Create a [feature request issue](https://github.com/RysanekDavid/ER_Boss_Checklist/issues/new) and describe your idea.
+
+### 🙏 Community Support
+
+Your feedback helps make the application better for everyone. Thank you for contributing to the community!
 
 ---
 
@@ -215,8 +242,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Made with ❤️ for the Elden Ring community**
 
-[🔗 Download Latest Release](https://github.com/RysanekDavid/ER_Boss_Checklist/releases/latest) | 
-[🐛 Report Bug](https://github.com/RysanekDavid/ER_Boss_Checklist/issues) | 
+[🔗 Download Latest Release](https://github.com/RysanekDavid/ER_Boss_Checklist/releases/latest) |
+[🐛 Report Bug](https://github.com/RysanekDavid/ER_Boss_Checklist/issues) |
 [💡 Request Feature](https://github.com/RysanekDavid/ER_Boss_Checklist/issues)
 
 </div>

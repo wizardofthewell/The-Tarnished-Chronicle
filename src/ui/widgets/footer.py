@@ -21,6 +21,14 @@ class FooterWidget(QFrame):
 
         layout.addStretch()
 
+        # Request Feature link
+        feature_request_label = QLabel('<a href="https://github.com/RysanekDavid/ER_Boss_Checklist/issues/new?assignees=&labels=enhancement&projects=&template=&title=Feature%20Request%3A%20" style="color: #81A1C1;">💡 Request Feature</a>')
+        feature_request_label.setObjectName("creditLabel")
+        feature_request_label.setOpenExternalLinks(True)
+        layout.addWidget(feature_request_label)
+
+        layout.addWidget(QLabel(" | ", objectName="creditLabel"))
+
         credit_label = QLabel('Made with <span style="color: #ff0000;">♥</span> by <a href="https://github.com/RysanekDavid" style="color: #5B90C5;">Davosso</a>')
         credit_label.setObjectName("creditLabel")
         credit_label.setOpenExternalLinks(True)
