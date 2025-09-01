@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![App Logo](https://raw.githubusercontent.com/RysanekDavid/ER_Boss_Checklist/main/assets/icons/app_logo.png)
+🏰⚔️
 
 **The ultimate boss tracking companion for Elden Ring**
 
