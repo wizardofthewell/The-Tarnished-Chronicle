@@ -6,9 +6,9 @@
 
 **The ultimate boss tracking companion for Elden Ring**
 
-[![Latest Release](https://img.shields.io/github/v/release/RysanekDavid/ER_Boss_Checklist?style=for-the-badge)](https://github.com/RysanekDavid/ER_Boss_Checklist/releases/latest)
-[![Downloads](https://img.shields.io/github/downloads/RysanekDavid/ER_Boss_Checklist/total?style=for-the-badge)](https://github.com/RysanekDavid/ER_Boss_Checklist/releases)
-[![License](https://img.shields.io/github/license/RysanekDavid/ER_Boss_Checklist?style=for-the-badge)](LICENSE)
+[![Latest Release](https://img.shields.io/github/v/release/RysanekDavid/The-Tarnished-Chronicle?style=for-the-badge)](https://github.com/RysanekDavid/The-Tarnished-Chronicle/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/RysanekDavid/The-Tarnished-Chronicle/total?style=for-the-badge)](https://github.com/RysanekDavid/The-Tarnished-Chronicle/releases)
+[![License](https://img.shields.io/github/license/RysanekDavid/The-Tarnished-Chronicle?style=for-the-badge)](LICENSE)
 
 </div>
 
@@ -34,7 +34,7 @@
 
 ### Installation
 
-1. **Download** the latest `ER_Boss_Checklist_Setup.exe` from [Releases](https://github.com/RysanekDavid/ER_Boss_Checklist/releases/latest)
+1. **Download** the latest `ER_Boss_Checklist_Setup.exe` from [Releases](https://github.com/RysanekDavid/The-Tarnished-Chronicle/releases/latest)
 2. **Run** the installer and follow the setup wizard
 3. **Launch** The Tarnished's Chronicle from your desktop or start menu
 
@@ -164,8 +164,8 @@
 
 If you encounter issues not covered here:
 
-1. Check [existing issues](https://github.com/RysanekDavid/ER_Boss_Checklist/issues)
-2. Create a [new issue](https://github.com/RysanekDavid/ER_Boss_Checklist/issues/new) with:
+1. Check [existing issues](https://github.com/RysanekDavid/The-Tarnished-Chronicle/issues)
+2. Create a [new issue](https://github.com/RysanekDavid/The-Tarnished-Chronicle/issues/new) with:
    - Detailed description of the problem
    - Your system specifications
    - Steps to reproduce the issue
@@ -207,8 +207,8 @@ _These features will be prioritized based on community feedback and application 
 
 Found a bug? Please report it:
 
-1. **Check [existing issues](https://github.com/RysanekDavid/ER_Boss_Checklist/issues)** to avoid duplicates
-2. **Create a [new issue](https://github.com/RysanekDavid/ER_Boss_Checklist/issues/new)** with:
+1. **Check [existing issues](https://github.com/RysanekDavid/The-Tarnished-Chronicle/issues)** to avoid duplicates
+2. **Create a [new issue](https://github.com/RysanekDavid/The-Tarnished-Chronicle/issues/new)** with:
    - Detailed description of the problem
    - Steps to reproduce the issue
    - Your system specifications
@@ -216,7 +216,7 @@ Found a bug? Please report it:
 
 ### 💡 Feature Requests
 
-Have an idea for a new feature? I'd love to hear it! Create a [feature request issue](https://github.com/RysanekDavid/ER_Boss_Checklist/issues/new) and describe your idea.
+Have an idea for a new feature? I'd love to hear it! Create a [feature request issue](https://github.com/RysanekDavid/The-Tarnished-Chronicle/issues/new) and describe your idea.
 
 ### 🙏 Community Support
 
@@ -242,8 +242,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Made with ❤️ for the Elden Ring community**
 
-[🔗 Download Latest Release](https://github.com/RysanekDavid/ER_Boss_Checklist/releases/latest) |
-[🐛 Report Bug](https://github.com/RysanekDavid/ER_Boss_Checklist/issues) |
-[💡 Request Feature](https://github.com/RysanekDavid/ER_Boss_Checklist/issues)
+[🔗 Download Latest Release](https://github.com/RysanekDavid/The-Tarnished-Chronicle/releases/latest) |
+[🐛 Report Bug](https://github.com/RysanekDavid/The-Tarnished-Chronicle/issues) |
+[💡 Request Feature](https://github.com/RysanekDavid/The-Tarnished-Chronicle/issues)
 
 </div>
