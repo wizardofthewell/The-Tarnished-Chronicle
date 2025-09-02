@@ -1,8 +1,8 @@
 {
-  "version": "2.0.0",
-  "url": "http://localhost:8000/ER_Boss_Checklist_Setup.exe",
-  "sha256": "b400d1147bd22eacf4fcf54173e8bebce933805a103448e63725b24699dd7dcb",
-  "notes": "- Added new feature X.\n- Fixed bug Y.\n- Improved performance.",
-  "force": false,
-  "published_at": "2025-08-09T12:00:00Z"
+  "version": "1.0.2",
+  "url": "https://github.com/RysanekDavid/The-Tarnished-Chronicle/releases/download/v1.0.2/ER_Boss_Checklist_Setup.exe",
+  "sha256": "cac26147b6ea12aa1c52f8ce7c8eb59c58487bfaee0266cae9a2a8836e8b8efb",
+  "notes": "🚨 Critical Bug Fixes:\n- Fixed save file selection import path error\n- Fixed character selection loading issue\n- Fixed maps re-downloading on every launch\n- Improved app stability and performance",
+  "force": true,
+  "published_at": "2025-09-02T14:45:00Z"
 }
