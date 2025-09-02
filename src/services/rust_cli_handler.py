@@ -23,7 +23,7 @@ class RustCliHandler:
         path_to_check = placeholder
         if path_to_check == "RUST_CLI_TOOL_PATH_PLACEHOLDER":
             try:
-                from ..utils.utils import get_resource_path
+                from ..utils import get_resource_path
                 cli_name = "flag_extractor_cli.exe" if os.name == 'nt' else "flag_extractor_cli"
                 default_path = get_resource_path(os.path.join("flag_extractor_cli", "target", "release", cli_name))
                 
@@ -43,7 +43,6 @@ class RustCliHandler:
         return bool(self.cli_path and os.path.exists(self.cli_path))
 
     def list_characters(self, save_file_path):
-        # ... (tato metoda zůstává beze změny) ...
         if not self.is_cli_available():
             return None, "Rust CLI tool not found."
         command = [self.cli_path, "list-characters", "--save-file-path", save_file_path]

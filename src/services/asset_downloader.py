@@ -23,11 +23,16 @@ def check_and_download_image_assets():
 
     # Check if the folder exists, is not empty, and the version file matches.
     if os.path.exists(image_assets_path) and os.path.exists(version_file) and os.listdir(image_assets_path):
-        with open(version_file, 'r') as f:
-            local_version = f.read().strip()
-        if local_version == APP_VERSION:
-            print("Image assets are up to date.")
+        try:
+            with open(version_file, 'r') as f:
+                local_version = f.read().strip()
+            # Always consider assets up to date if they exist, regardless of version
+            # to prevent re-downloading on every launch
+            print(f"Image assets found (version: {local_version}). Skipping download.")
             return True
+        except Exception as e:
+            print(f"Error reading version file: {e}")
+            # Continue to download if version file is corrupted
 
     print("Image assets are missing or outdated. Starting download...")
     
