@@ -1,10 +1,10 @@
 # src/app_config.py
 
 # Verze aplikace
-APP_VERSION = "1.0.2"
+APP_VERSION = "1.0.3"
 
 # URL k manifestu s nejnovější verzí
-MANIFEST_URL = "https://raw.githubusercontent.com/RysanekDavid/ER_Boss_Checklist/main/update_test/latest.json"
+MANIFEST_URL = "https://raw.githubusercontent.com/RysanekDavid/The-Tarnished-Chronicle/main/update_test/latest.json"
 
 # Asset Management for large image files
 IMAGE_ASSETS_URL = "https://github.com/RysanekDavid/ER_checklist_assets/releases/download/v1.0.0/Bosses_locations.zip"
