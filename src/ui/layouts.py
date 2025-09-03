@@ -17,7 +17,7 @@ def create_file_slot_layout(parent_widget):
     parent_widget.save_file_path_label.setObjectName("filePathLabel")
     parent_widget.save_file_path_label.setWordWrap(True)
     main_v_layout.addWidget(parent_widget.save_file_path_label)
-    parent_widget.browse_button = QPushButton("Browse for ER0000.sl2")
+    parent_widget.browse_button = QPushButton("Browse for Save File")
     parent_widget.browse_button.setObjectName("browseButton")
     main_v_layout.addWidget(parent_widget.browse_button)
     main_v_layout.addSpacing(15)

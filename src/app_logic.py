@@ -21,11 +21,13 @@ class AppLogic:
         self.is_game_running = False
         self.last_play_time_snapshot = -1
         self.last_snapshot_real_time = -1
+        self._actual_save_file_path = ""  # Store the real path without UI decorations
 
     def browse_for_save_file(self):
         """Opens a file dialog to select the Elden Ring save file with improved logic."""
         start_dir = ""
-        current_path = self.app.save_file_path_label.text()
+        # Use the actual file path if available, otherwise try to extract from display text
+        current_path = self._actual_save_file_path if self._actual_save_file_path else self.app.save_file_path_label.text()
         
         # 1. If a path is already selected, start there.
         if current_path and os.path.exists(os.path.dirname(current_path)):
@@ -47,14 +49,24 @@ class AppLogic:
             parent=self.app,
             caption="Select Elden Ring Save File",
             dir=start_dir,
-            filter="Elden Ring Save File (*.sl2)"
+            filter="Elden Ring Save Files (*.sl2 *.co2);;Vanilla Save (*.sl2);;Seamless Coop Save (*.co2)"
         )
         if file_path:
             self.on_save_file_path_changed(file_path)
 
     def on_save_file_path_changed(self, new_path):
         """Handles the event when a new save file path is selected."""
-        self.app.save_file_path_label.setText(new_path)
+        # Detect if this is a Seamless Coop save file
+        is_seamless_coop = new_path.lower().endswith('.co2')
+        
+        # Update the path display with mode indicator
+        if is_seamless_coop:
+            display_path = f"🔗 {new_path} (Seamless Coop)"
+        else:
+            display_path = f"⚔️ {new_path} (Vanilla)"
+            
+        self.app.save_file_path_label.setText(display_path)
+        self._actual_save_file_path = new_path  # Store the actual path
         self.app.settings.setValue("saveFilePath", new_path)
         self._load_characters_for_save_file(new_path)
         self.app.update_onboarding_state("select_character")
@@ -105,7 +117,7 @@ class AppLogic:
         self.app.settings.setValue("lastCharacterIndex", index)
         self.app.character_warning_label.setVisible(False) # Hide warning on new selection
         
-        save_file_path = self.app.save_file_path_label.text()
+        save_file_path = self._actual_save_file_path
         slot_index = selected_data["slot_index"]
         all_event_ids = self.app.boss_data_manager.get_all_event_ids_to_monitor()
         

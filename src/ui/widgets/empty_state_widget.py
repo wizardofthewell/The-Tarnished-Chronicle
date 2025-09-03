@@ -32,7 +32,7 @@ class EmptyStateWidget(QWidget):
         self.title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         # Instructional Text
-        self.instruction_label = QLabel("To get started, please select your Elden Ring save file (.sl2).")
+        self.instruction_label = QLabel("To get started, please select your Elden Ring save file (.sl2 for Vanilla or .co2 for Seamless Coop).")
         self.instruction_label.setObjectName("emptyStateInstruction")
         self.instruction_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.instruction_label.setWordWrap(True)
@@ -53,7 +53,7 @@ class EmptyStateWidget(QWidget):
         if state == "select_file":
             self.icon_label.setPixmap(QPixmap(get_resource_path("assets/icons/file-text.svg")).scaled(48, 48, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation))
             self.title_label.setText("Welcome to the ER Boss Checklist")
-            self.instruction_label.setText("To get started, please select your Elden Ring save file (.sl2) using the left menu button.")
+            self.instruction_label.setText("To get started, please select your Elden Ring save file (.sl2 for Vanilla or .co2 for Seamless Coop) using the left menu button.")
         elif state == "select_character":
             self.icon_label.setPixmap(QPixmap(get_resource_path("assets/icons/user.svg")).scaled(48, 48, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation))
             self.title_label.setText("Save File Loaded!")

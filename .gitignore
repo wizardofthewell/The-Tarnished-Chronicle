@@ -181,6 +181,7 @@ dist/
 
 # Large binary files
 *.sl2
+*.co2
 *.ct
 compare/
 ER_Cheat/

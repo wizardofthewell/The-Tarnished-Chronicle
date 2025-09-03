@@ -27,6 +27,7 @@
 - **🎮 Live Overlay** - In-game overlay showing your current progress
 - **📹 OBS Integration** - Export stats to text files for streaming setups
 - **🔄 Auto-Updates** - Automatic update notifications and installation
+- **🔗 Seamless Coop Support** - Compatible with both Vanilla (.sl2) and Seamless Coop Mod (.co2) save files
 
 ---
 
@@ -40,8 +41,9 @@
 
 ### First Setup
 
-1. **Select Save File** - Browse to your Elden Ring save file (`ER0000.sl2`)
-   - Default location: `%APPDATA%\EldenRing\[Steam_ID]\ER0000.sl2`
+1. **Select Save File** - Browse to your Elden Ring save file:
+   - **Vanilla Elden Ring**: `ER0000.sl2` (Default location: `%APPDATA%\EldenRing\[Steam_ID]\ER0000.sl2`)
+   - **Seamless Coop Mod**: `ER0000.co2` (Same location)
 2. **Choose Character** - Select which character slot you want to track
 3. **Start Playing** - The app will automatically monitor your progress!
 
