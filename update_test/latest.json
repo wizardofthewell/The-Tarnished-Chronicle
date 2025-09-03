@@ -1,8 +1,8 @@
 {
-  "version": "1.0.3",
-  "url": "https://github.com/RysanekDavid/The-Tarnished-Chronicle/releases/download/v1.0.3/ER_Boss_Checklist_Setup.exe",
-  "sha256": "969682c8f2d3b5f10e6c7b2a837ea7697ea27bffc3fa8a164cbfd5fd993adc69",
-  "notes": "🚨 Critical Bug Fixes & Auto-Updater Fix:\n- Fixed save file selection import path error\n- Fixed character selection loading issue\n- Fixed maps re-downloading on every launch\n- Fixed auto-updater manifest URL (now works for all versions)\n- Improved app stability and performance",
-  "force": true,
-  "published_at": "2025-09-02T14:45:00Z"
+  "version": "1.0.4",
+  "url": "https://github.com/RysanekDavid/The-Tarnished-Chronicle/releases/download/v1.0.4/ER_Boss_Checklist_Setup.exe",
+  "sha256": "b400d1147bd22eacf4fcf54173e8bebce933805a103448e63725b24699dd7dcb",
+  "notes": "🔗 NEW: Seamless Coop Support!\n- Added support for .co2 save files (Seamless Coop mod)\n- Auto-detection of Vanilla vs Seamless Coop saves\n- Visual indicators for save file types\n- Updated file browser with both formats\n- Full compatibility with existing features",
+  "force": false,
+  "published_at": "2025-09-03T18:00:00Z"
 }

@@ -6,7 +6,7 @@
 
 !define APP_NAME "ER Boss Checklist"
 !define COMPANY_NAME "TheTarnishedChronicle"
-!define APP_VERSION "1.0.3"
+!define APP_VERSION "1.0.4"
 !define EXE_NAME "ER_Boss_Checklist.exe" ; Static EXE name
 !define ICON_FILE "assets\icons\app_logo.ico"
 !define OUTPUT_FILENAME "ER_Boss_Checklist_Setup.exe"
