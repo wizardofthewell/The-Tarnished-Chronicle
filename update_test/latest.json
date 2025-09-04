@@ -1,6 +1,6 @@
 {
   "version": "1.0.4",
-  "url": "https://github.com/RysanekDavid/The-Tarnished-Chronicle/releases/download/v1.0.4/ER_Boss_Checklist_Setup.exe",
+  "url": "https://github.com/RysanekDavid/The-Tarnished-Chronicle/releases/download/v1.0.4/The_Tarnished_Chronicle_Setup.exe",
   "sha256": "4f957f65ec9d32bb64cada31097000aa788ce1f87d70b7ce8689052c9bb11a00",
   "notes": "🔗 NEW: Seamless Coop Support!\n- Added support for .co2 save files (Seamless Coop mod)\n- Auto-detection of Vanilla vs Seamless Coop saves\n- Visual indicators for save file types\n- Updated file browser with both formats\n- Full compatibility with existing features",
   "force": false,
