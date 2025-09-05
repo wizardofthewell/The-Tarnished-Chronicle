@@ -1,8 +1,8 @@
 {
-  "version": "1.0.4",
-  "url": "https://github.com/RysanekDavid/The-Tarnished-Chronicle/releases/download/v1.0.4/The_Tarnished_Chronicle_Setup.exe",
-  "sha256": "4f957f65ec9d32bb64cada31097000aa788ce1f87d70b7ce8689052c9bb11a00",
-  "notes": "🔗 NEW: Seamless Coop Support!\n- Added support for .co2 save files (Seamless Coop mod)\n- Auto-detection of Vanilla vs Seamless Coop saves\n- Visual indicators for save file types\n- Updated file browser with both formats\n- Full compatibility with existing features",
+  "version": "1.0.5",
+  "url": "https://github.com/RysanekDavid/The-Tarnished-Chronicle/releases/download/v1.0.5/The_Tarnished_Chronicle_Setup.exe",
+  "sha256": "2cd3f1e72d95864cffa0a0e8cbec7e93a27f5e5d9d26067a01ff3f452278afb2",
+  "notes": "🔧 CRITICAL: Fixed Auto-Updater!\n- Fixed download functionality in auto-updater\n- Added progress indicators for downloads\n- Better error handling and reporting\n- Fixed application closing after update\n- All users should update to this version for future auto-updates to work",
   "force": false,
-  "published_at": "2025-09-03T18:00:00Z"
+  "published_at": "2025-09-04T22:00:00Z"
 }

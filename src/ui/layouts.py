@@ -4,6 +4,7 @@ from PySide6.QtWidgets import (
     QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QComboBox, QFrame, QCheckBox
 )
 from PySide6.QtCore import Qt
+from PySide6.QtGui import QPixmap
 from .widgets.icon_header import IconHeader
 from ..utils import get_resource_path
 
@@ -13,10 +14,27 @@ def create_file_slot_layout(parent_widget):
     
     # --- Save File Section ---
     main_v_layout.addWidget(IconHeader(get_resource_path("assets/icons/file-text.svg"), "Save File"))
+    
+    # Create horizontal layout for path and success indicator
+    path_layout = QHBoxLayout()
+    path_layout.setSpacing(8)
+    
+    # Success indicator icon (initially hidden)
+    parent_widget.save_file_success_icon = QLabel()
+    success_pixmap = QPixmap(get_resource_path("assets/icons/check-circle.svg"))
+    parent_widget.save_file_success_icon.setPixmap(success_pixmap.scaled(20, 20, Qt.KeepAspectRatio, Qt.SmoothTransformation))
+    parent_widget.save_file_success_icon.setFixedSize(20, 20)
+    parent_widget.save_file_success_icon.setVisible(False)
+    path_layout.addWidget(parent_widget.save_file_success_icon)
+    
+    # File path label
     parent_widget.save_file_path_label = QLabel("No save file selected...")
     parent_widget.save_file_path_label.setObjectName("filePathLabel")
     parent_widget.save_file_path_label.setWordWrap(True)
-    main_v_layout.addWidget(parent_widget.save_file_path_label)
+    path_layout.addWidget(parent_widget.save_file_path_label, 1)  # Stretch factor 1
+    
+    main_v_layout.addLayout(path_layout)
+    
     parent_widget.browse_button = QPushButton("Browse for Save File")
     parent_widget.browse_button.setObjectName("browseButton")
     main_v_layout.addWidget(parent_widget.browse_button)

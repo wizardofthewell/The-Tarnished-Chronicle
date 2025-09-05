@@ -5,9 +5,11 @@ import time
 import hashlib
 import tempfile
 import subprocess
+import requests
 import threading
-from PySide6.QtWidgets import QFileDialog, QMessageBox, QLabel
-from PySide6.QtCore import Qt, QMetaObject, Q_ARG
+import ctypes
+from PySide6.QtWidgets import QFileDialog, QMessageBox, QLabel, QApplication
+from PySide6.QtCore import Qt, QTimer, QMetaObject, Q_ARG, Signal, QObject
 from .ui.widgets.location_section import LocationSectionWidget
 from .ui.dialogs.boss_stats_dialog import BossStatsDialog
 from .ui.dialogs.location_dialog import LocationDialog
@@ -59,33 +61,63 @@ class AppLogic:
         # Detect if this is a Seamless Coop save file
         is_seamless_coop = new_path.lower().endswith('.co2')
         
-        # Update the path display with mode indicator
-        if is_seamless_coop:
-            display_path = f"🔗 {new_path} (Seamless Coop)"
-        else:
-            display_path = f"⚔️ {new_path} (Vanilla)"
-            
-        self.app.save_file_path_label.setText(display_path)
+        # First load characters to check if the file is valid
         self._actual_save_file_path = new_path  # Store the actual path
-        self.app.settings.setValue("saveFilePath", new_path)
-        self._load_characters_for_save_file(new_path)
-        self.app.update_onboarding_state("select_character")
+        success = self._load_characters_for_save_file(new_path)
+        
+        if success:
+            # Update the path display with mode indicator
+            if is_seamless_coop:
+                display_path = f"🔗 {new_path} (Seamless Coop)"
+            else:
+                display_path = f"⚔️ {new_path} (Vanilla)"
+            
+            self.app.save_file_path_label.setText(display_path)
+            self.app.settings.setValue("saveFilePath", new_path)
+            self.app.update_onboarding_state("select_character")
+            
+            # Show success icon and hide it after 3 seconds
+            self.app.save_file_success_icon.setVisible(True)
+            QTimer.singleShot(3000, lambda: self.app.save_file_success_icon.setVisible(False))
+        else:
+            # Keep the old path display if loading failed
+            pass
 
     def _load_characters_for_save_file(self, save_file_path):
-        """Loads character data from the save file and populates the combobox."""
+        """Loads character data from the save file and populates the combobox.
+        Returns True if successful, False otherwise."""
         self.app.character_slot_combobox.clear()
         self.app.character_slot_combobox.addItem("Select a character", userData=None)
         
         characters, err = self.app.rust_cli_handler.list_characters(save_file_path)
         
         if err:
-            QMessageBox.warning(self.app, "Error", f"Failed to read characters:\n{err}")
+            # Check if this is a wrong file type error
+            if "ZSTD" in err or "DCX" in err or "SaveParserError" in err or "BND4" in err or "Buckets" in err:
+                QMessageBox.warning(
+                    self.app, 
+                    "Incompatible Save File Format", 
+                    "This save file appears to be from an older or incompatible version of Elden Ring.\n\n"
+                    "Common causes:\n"
+                    "• Old pirated/cracked game version saves\n"
+                    "• Outdated save file format\n"
+                    "• Wrong Steam ID folder\n\n"
+                    "Solutions:\n"
+                    "1. Try the OTHER numbered folder in %APPDATA%\\EldenRing\\\n"
+                    "   (Different folders = different game versions)\n\n"
+                    "2. If you have multiple folders, use the one where other save editors work\n\n"
+                    "3. For old saves: Use 'Elden Ring Save Manager' from Nexus Mods to\n"
+                    "   convert your save to the current format first\n\n"
+                    "Supported formats: ER0000.sl2 (Vanilla) or ER0000.co2 (Seamless Coop)"
+                )
+            else:
+                QMessageBox.warning(self.app, "Error", f"Failed to read characters:\n{err}")
             self.app.character_slot_combobox.setEnabled(False)
-            return
+            return False
             
         if not characters:
             self.app.character_slot_combobox.setEnabled(False)
-            return
+            return False
 
         self.app.character_slot_combobox.setEnabled(True)
         for char in sorted(characters, key=lambda x: x.get('slot_index', 0)):
@@ -93,9 +125,10 @@ class AppLogic:
             level = char.get('character_level', '??')
             self.app.character_slot_combobox.addItem(f"{char_name} (Level {level})", userData=char)
             
-        last_char_index = self.app.settings.value("lastCharacterIndex", 0, type=int)
-        if last_char_index < self.app.character_slot_combobox.count():
-            self.app.character_slot_combobox.setCurrentIndex(last_char_index)
+        # Always default to "Select a character" (index 0) when loading a new save file
+        # The user must explicitly choose a character
+        self.app.character_slot_combobox.setCurrentIndex(0)
+        return True
 
     def handle_character_selection_change(self, index):
         """Handles the event when a new character is selected."""
@@ -506,15 +539,22 @@ class AppLogic:
             if loc in expanded_states:
                 section_widget.set_expanded(expanded_states[loc])
     
-        def start_update_download(self, manifest_data: dict):
-            """
-            Spustí proces aktualizace v samostatném vlákně.
-            """
-            update_thread = threading.Thread(target=self._perform_update, args=(manifest_data,))
-            update_thread.daemon = True
-            update_thread.start()
+    def start_update_download(self, manifest_data: dict):
+        """
+        Spustí proces aktualizace v samostatném vlákně s progress dialogem.
+        """
+        from src.ui.dialogs.download_progress import DownloadProgressDialog
+        
+        # Create and show progress dialog
+        self.progress_dialog = DownloadProgressDialog(self.app)
+        self.progress_dialog.show()
+        
+        # Start download thread
+        update_thread = threading.Thread(target=self._perform_update, args=(manifest_data,))
+        update_thread.daemon = True
+        update_thread.start()
     
-        def _perform_update(self, manifest_data: dict):
+    def _perform_update(self, manifest_data: dict):
             """
             Stáhne, ověří a spustí nový instalátor.
             Tato metoda běží ve vedlejším vlákně.
@@ -532,12 +572,62 @@ class AppLogic:
                 installer_path = os.path.join(temp_dir, os.path.basename(url))
                 
                 print(f"Downloading update from {url} to {installer_path}...")
-                with requests.get(url, stream=True) as r:
-                    r.raise_for_status()
+                
+                # Better error handling for download with UI progress
+                try:
+                    response = requests.get(url, stream=True, timeout=30)
+                    response.raise_for_status()
+                    
+                    total_size = int(response.headers.get('content-length', 0))
+                    downloaded = 0
+                    
+                    # Update dialog status
+                    QMetaObject.invokeMethod(
+                        self.progress_dialog,
+                        "update_status",
+                        Qt.ConnectionType.QueuedConnection,
+                        Q_ARG(str, "Downloading update...")
+                    )
+                    
                     with open(installer_path, 'wb') as f:
-                        for chunk in r.iter_content(chunk_size=8192):
-                            f.write(chunk)
-                print("Download complete.")
+                        for chunk in response.iter_content(chunk_size=8192):
+                            if hasattr(self, 'progress_dialog') and self.progress_dialog.is_cancelled():
+                                print("Download cancelled by user")
+                                return
+                            if chunk:
+                                f.write(chunk)
+                                downloaded += len(chunk)
+                                if total_size > 0:
+                                    progress = (downloaded / total_size) * 100
+                                    print(f"Download progress: {progress:.1f}%")
+                                    # Update UI progress
+                                    QMetaObject.invokeMethod(
+                                        self.progress_dialog,
+                                        "update_progress",
+                                        Qt.ConnectionType.QueuedConnection,
+                                        Q_ARG(int, int(progress))
+                                    )
+                                    QMetaObject.invokeMethod(
+                                        self.progress_dialog,
+                                        "update_size",
+                                        Qt.ConnectionType.QueuedConnection,
+                                        Q_ARG(int, downloaded),
+                                        Q_ARG(int, total_size)
+                                    )
+                    
+                    print("Download complete.")
+                    QMetaObject.invokeMethod(
+                        self.progress_dialog,
+                        "update_status",
+                        Qt.ConnectionType.QueuedConnection,
+                        Q_ARG(str, "Verifying file integrity...")
+                    )
+                except requests.exceptions.RequestException as e:
+                    print(f"Download failed: {e}")
+                    if hasattr(self, 'progress_dialog'):
+                        self.progress_dialog.close()
+                    self._show_update_error(f"Failed to download update: {e}")
+                    return
     
                 # 2. Ověření hashe
                 print("Verifying file integrity...")
@@ -556,15 +646,86 @@ class AppLogic:
                 
                 print("File integrity verified.")
     
-                # 3. Spuštění instalátoru a ukončení aplikace
-                print("Starting installer and closing application...")
-                subprocess.Popen([installer_path, "/S"]) # /S je pro tichou instalaci NSIS
-                self.app.close()
+                # 3. Spuštění instalátoru jako správce a ukončení aplikace
+                print(f"Update downloaded. Waiting for user to click 'Install Now'...")
+                try:
+                    # Update dialog to show completion
+                    if hasattr(self, 'progress_dialog'):
+                        QMetaObject.invokeMethod(
+                            self.progress_dialog,
+                            "set_completed",
+                            Qt.ConnectionType.QueuedConnection
+                        )
+                        
+                        # Wait for dialog to be closed (user clicks "Install Now")
+                        import time
+                        while hasattr(self, 'progress_dialog') and self.progress_dialog.isVisible():
+                            time.sleep(0.1)
+                        
+                        # Only launch installer after user clicks "Install Now"
+                        if not self.progress_dialog.is_cancelled():
+                            print(f"Starting installer as administrator: {installer_path}")
+                            self._launch_installer(installer_path)
+                        else:
+                            print("Update cancelled by user")
+                except Exception as e:
+                    print(f"Failed to start installer: {e}")
+                    if hasattr(self, 'progress_dialog'):
+                        self.progress_dialog.close()
+                    self._show_update_error(f"Failed to start installer: {e}")
     
             except Exception as e:
                 self._show_update_error(f"An error occurred during the update process: {e}")
     
-        def _show_update_error(self, message: str):
+    def _launch_installer(self, installer_path):
+        """Launch installer and close application"""
+        try:
+            # Start installer as administrator
+            result = ctypes.windll.shell32.ShellExecuteW(
+                None,
+                "runas",  # Run as administrator
+                installer_path,
+                None,
+                None,
+                1  # Show window
+            )
+            
+            if result > 32:  # Success
+                print("Installer launched successfully. Closing application...")
+                # Close progress dialog
+                if hasattr(self, 'progress_dialog'):
+                    self.progress_dialog.close()
+                
+                # Force close the application immediately after installer starts
+                # We need to use QMetaObject to safely close from thread
+                import time
+                time.sleep(1)  # Give installer time to start
+                
+                # Use QMetaObject to safely call quit from thread
+                QMetaObject.invokeMethod(
+                    QApplication.instance(),
+                    "quit",
+                    Qt.ConnectionType.QueuedConnection
+                )
+            else:
+                print(f"Failed to start installer as admin. Error code: {result}")
+                raise Exception(f"ShellExecute failed with code {result}")
+        except Exception as e:
+            print(f"Failed to start installer: {e}")
+            if hasattr(self, 'progress_dialog'):
+                self.progress_dialog.close()
+            self._show_update_error(f"Failed to start installer: {e}")
+    
+    def _force_close_app(self):
+        """Force close the application"""
+        if hasattr(self, 'app') and self.app:
+            print("Closing application now...")
+            self.app.quit()
+            # Force exit if quit doesn't work
+            import sys
+            sys.exit(0)
+    
+    def _show_update_error(self, message: str):
             """Zobrazí chybovou hlášku v hlavním vlákně UI."""
             print(f"Update Error: {message}")
             QMetaObject.invokeMethod(

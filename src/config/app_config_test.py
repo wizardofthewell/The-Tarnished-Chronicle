@@ -1,11 +1,10 @@
-# src/app_config.py
+# src/app_config_test.py - TEST CONFIGURATION
 
 # Verze aplikace
-APP_VERSION = "1.0.5"
+APP_VERSION = "1.0.4"  # Simulujeme starou verzi
 
-# URL k manifestu s nejnovější verzí "https://raw.githubusercontent.com/RysanekDavid/The-Tarnished-Chronicle/main/update_test/latest.json"
-MANIFEST_URL = "https://raw.githubusercontent.com/RysanekDavid/The-Tarnished-Chronicle/main/update_test/latest.json"
-# TEST_URL = "http://localhost:8000/test_manifest.json"
+# URL k TEST manifestu - pro testování použijeme lokální server
+MANIFEST_URL = "http://localhost:8000/test_manifest.json"
 
 # Asset Management for large image files
 IMAGE_ASSETS_URL = "https://github.com/RysanekDavid/ER_checklist_assets/releases/download/v1.0.0/Bosses_locations.zip"

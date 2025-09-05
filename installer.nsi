@@ -6,7 +6,7 @@
 
 !define APP_NAME "ER Boss Checklist"
 !define COMPANY_NAME "TheTarnishedChronicle"
-!define APP_VERSION "1.0.4"
+!define APP_VERSION "1.0.5"
 !define EXE_NAME "ER_Boss_Checklist.exe" ; Static EXE name
 !define ICON_FILE "assets\icons\app_logo.ico"
 !define OUTPUT_FILENAME "ER_Boss_Checklist_Setup.exe"
@@ -16,6 +16,7 @@
 ;--------------------------------
 
 !include "MUI2.nsh"
+!include "WinMessages.nsh"
 !define MUI_ABORTWARNING
 !define MUI_ICON "${ICON_FILE}"
 !define MUI_UNICON "${ICON_FILE}"
@@ -61,7 +62,32 @@ LangString DESC_StartMenuShortcut ${LANG_ENGLISH} "Create Start Menu Shortcut"
 ; --- Sections ---
 Section "!$(DESC_Core)" SEC_CORE
   SectionIn RO ; Required section
+  
+  ; Check if app is running and close it
+  TryAgain:
+  FindWindow $0 "" "ER Boss Checklist"
+  IntCmp $0 0 NotRunning
+    MessageBox MB_RETRYCANCEL|MB_ICONEXCLAMATION "ER Boss Checklist is currently running.$\n$\nPlease close the application to continue with the update.$\n$\nThe installer will attempt to close it automatically." IDRETRY TryClose IDCANCEL AbortInstall
+  TryClose:
+    ; Try to close the window
+    SendMessage $0 ${WM_CLOSE} 0 0
+    Sleep 2000
+    ; Check if still running
+    FindWindow $0 "" "ER Boss Checklist"
+    IntCmp $0 0 NotRunning
+    ; If still running, try terminate
+    ExecWait 'taskkill /F /IM "ER_Boss_Checklist.exe"'
+    Sleep 1000
+    Goto TryAgain
+  AbortInstall:
+    Abort "Installation cancelled."
+  NotRunning:
+  
   SetOutPath "$INSTDIR"
+  
+  ; Remove old files first (for clean update)
+  Delete "$INSTDIR\*.*"
+  RMDir /r "$INSTDIR\_internal"
   
   ; Files to install
   ; Copy all files from the build directory

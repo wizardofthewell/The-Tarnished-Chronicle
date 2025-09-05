@@ -23,20 +23,20 @@ from .widgets.stats_section import StatsSectionWidget
 from .widgets.empty_state_widget import EmptyStateWidget
 from .dialogs.boss_stats_dialog import BossStatsDialog
 from .dialogs.location_dialog import LocationDialog
-from ..config.app_config import (
+from src.config.app_config import (
     RUST_CLI_TOOL_PATH_PLACEHOLDER,
     DEFAULT_BOSS_REFERENCE_FILENAME,
     DLC_BOSS_REFERENCE_FILENAME,
     LOCATION_PROGRESSION_ORDER
 )
-from ..services.rust_cli_handler import RustCliHandler
-from ..domain.boss_data_manager import BossDataManager
-from ..services.save_monitor_logic import SaveMonitorLogic
+from src.services.rust_cli_handler import RustCliHandler
+from src.domain.boss_data_manager import BossDataManager
+from src.services.save_monitor_logic import SaveMonitorLogic
 from .managers.obs_manager import ObsManager
-from ..domain.timestamp_manager import TimestampManager
-from ..services.update_checker import UpdateChecker
-from ..app_logic import AppLogic
-from ..utils import get_resource_path
+from src.domain.timestamp_manager import TimestampManager
+from src.services.update_checker import UpdateChecker
+from src.app_logic import AppLogic
+from src.utils import get_resource_path
 import webbrowser
 
 class BossChecklistApp(QWidget):
