@@ -1,8 +1,8 @@
 {
-  "version": "1.0.5",
-  "url": "https://github.com/RysanekDavid/The-Tarnished-Chronicle/releases/download/v1.0.5/The_Tarnished_Chronicle_Setup.exe",
-  "sha256": "5fe76ae8dd4823936c587850dc5123b1c4fe205fa54accf4132b02391585fcd3",
-  "notes": "🔧 CRITICAL: Fixed Auto-Updater!\n- Fixed download functionality in auto-updater\n- Added progress indicators for downloads\n- Better error handling and reporting\n- Fixed application closing after update\n- All users should update to this version for future auto-updates to work",
+  "version": "1.0.6",
+  "url": "https://github.com/RysanekDavid/The-Tarnished-Chronicle/releases/download/v1.0.6/The_Tarnished_Chronicle_Setup.exe",
+  "sha256": "268eca52f11e3b4a13fd04694ae002ae4848d1fa85586af5236445c9ebaddcca",
+  "notes": "Improved Save File Reading - Now reads character data from the correct location for better accuracy\nEnhanced Compatibility - Should now work with all save files",
   "force": false,
-  "published_at": "2025-09-04T22:00:00Z"
+  "published_at": "2025-10-10T14:16:00Z"
 }
