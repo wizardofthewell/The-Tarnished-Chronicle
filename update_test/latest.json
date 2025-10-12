@@ -1,7 +1,7 @@
 {
   "version": "1.0.6",
   "url": "https://github.com/RysanekDavid/The-Tarnished-Chronicle/releases/download/v1.0.6/The_Tarnished_Chronicle_Setup.exe",
-  "sha256": "37ba0ef25fdd5ecb08fe2d45dfa6412d5ab7e7d79d703584fd509e6b675350ad",
+  "sha256": "1ac9d426baff3ac1ad73927c183135a5044b5fd2c737b30e5a784b7b9a463726",
   "notes": "Improved Save File Reading - Now reads character data from the correct location for better accuracy\nEnhanced Compatibility - Should now work with all save files",
   "force": false,
   "published_at": "2025-10-10T16:30:00Z"
