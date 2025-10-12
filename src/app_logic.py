@@ -632,10 +632,34 @@ class AppLogic:
                 # 2. Ověření hashe
                 print("Verifying file integrity...")
                 sha256_hash = hashlib.sha256()
+                file_size = os.path.getsize(installer_path)
+                verified = 0
+
                 with open(installer_path, "rb") as f:
-                    for byte_block in iter(lambda: f.read(4096), b""):
+                    # Zvětšit buffer na 8MB pro rychlejší čtení velkých souborů
+                    while True:
+                        # Check if cancelled during verification
+                        if hasattr(self, 'progress_dialog') and self.progress_dialog.is_cancelled():
+                            print("Verification cancelled by user")
+                            os.remove(installer_path)  # Clean up downloaded file
+                            return
+
+                        byte_block = f.read(8388608)  # 8MB chunks
+                        if not byte_block:
+                            break
                         sha256_hash.update(byte_block)
-                
+                        verified += len(byte_block)
+
+                        # Update progress for verification
+                        if file_size > 0:
+                            verify_progress = (verified / file_size) * 100
+                            QMetaObject.invokeMethod(
+                                self.progress_dialog,
+                                "update_progress",
+                                Qt.ConnectionType.QueuedConnection,
+                                Q_ARG(int, int(verify_progress))
+                            )
+
                 calculated_hash = sha256_hash.hexdigest()
     
                 if calculated_hash.lower() != expected_hash.lower():
