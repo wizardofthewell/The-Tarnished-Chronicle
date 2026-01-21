@@ -3,7 +3,7 @@
 import os
 import sys
 from PySide6.QtCore import QSize, QByteArray, Qt, QFile, QIODevice
-from PySide6.QtGui import QColor, QPixmap
+from PySide6.QtGui import QColor, QPixmap, QPainter, QFont
 
 def get_resource_path(relative_path):
     """
@@ -20,15 +20,55 @@ def get_resource_path(relative_path):
         # Dev environment: return normal file system path
         return relative_path
 
+# Unicode fallback icons for when SVG files are missing
+UNICODE_ICONS = {
+    'file-text': ('📄', '#eab308'),
+    'user': ('👤', '#eab308'),
+    'filter': ('⚙', '#eab308'),
+    'clock': ('🕐', '#eab308'),
+    'skull-and-crossbones': ('💀', '#eab308'),
+    'skull': ('💀', '#eab308'),
+    'info-circle-solid': ('ℹ', '#3b82f6'),
+    'info-circle': ('ℹ', '#3b82f6'),
+    'check-circle': ('✓', '#22c55e'),
+    'square': ('☐', '#9ca3af'),
+    'check-square': ('☑', '#22c55e'),
+}
+
+def _create_unicode_pixmap(symbol: str, color: QColor, size: QSize) -> QPixmap:
+    """Create a pixmap with a Unicode character rendered on it."""
+    pixmap = QPixmap(size)
+    pixmap.fill(Qt.GlobalColor.transparent)
+    
+    painter = QPainter(pixmap)
+    painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+    painter.setRenderHint(QPainter.RenderHint.TextAntialiasing)
+    
+    font = QFont()
+    font.setPixelSize(int(size.height() * 0.85))
+    font.setBold(True)
+    painter.setFont(font)
+    painter.setPen(color)
+    painter.drawText(pixmap.rect(), Qt.AlignmentFlag.AlignCenter, symbol)
+    painter.end()
+    
+    return pixmap
+
 def create_colored_pixmap(icon_path: str, color: QColor, size: QSize) -> QPixmap:
     """
     Loads an SVG icon from a file path or a Qt resource path,
     replaces its 'currentColor' with a specified QColor,
     and returns it as a scaled QPixmap.
+    Falls back to Unicode icons if SVG is not available.
     """
     try:
         qfile = QFile(icon_path)
         if not qfile.open(QIODevice.OpenModeFlag.ReadOnly | QIODevice.OpenModeFlag.Text):
+            # SVG file not found - try Unicode fallback
+            icon_name = os.path.basename(icon_path).replace('.svg', '')
+            if icon_name in UNICODE_ICONS:
+                symbol, default_color = UNICODE_ICONS[icon_name]
+                return _create_unicode_pixmap(symbol, color, size)
             raise IOError(f"Cannot open resource file: {icon_path}")
 
         svg_data = qfile.readAll().data().decode('utf-8')
@@ -42,6 +82,11 @@ def create_colored_pixmap(icon_path: str, color: QColor, size: QSize) -> QPixmap
         
         return pixmap.scaled(size, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
     except Exception as e:
+        # Try Unicode fallback on any error
+        icon_name = os.path.basename(icon_path).replace('.svg', '') if icon_path else ''
+        if icon_name in UNICODE_ICONS:
+            symbol, default_color = UNICODE_ICONS[icon_name]
+            return _create_unicode_pixmap(symbol, color, size)
         print(f"Error creating colored pixmap for {icon_path}: {e}")
         return QPixmap()
 def format_seconds_to_hms(seconds: int) -> str:

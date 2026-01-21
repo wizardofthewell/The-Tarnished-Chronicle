@@ -4,6 +4,7 @@ from PySide6.QtWidgets import QWidget, QHBoxLayout, QLabel, QPushButton
 from PySide6.QtGui import QColor, QPixmap, QIcon
 from PySide6.QtCore import Qt, QSize
 from ...utils import create_colored_pixmap, get_resource_path
+from .unicode_icons import create_unicode_pixmap
 
 class IconHeader(QWidget):
     def __init__(self, icon_path, text, is_expandable=False, parent=None):
@@ -34,8 +35,6 @@ class IconHeader(QWidget):
 
     def set_expanded(self, is_expanded):
         if hasattr(self, 'toggle_button'):
-            if is_expanded:
-                self.toggle_button.setIcon(QIcon(get_resource_path("assets/icons/chevron-down.svg")))
-            else:
-                self.toggle_button.setIcon(QIcon(get_resource_path("assets/icons/chevron-right.svg")))
+            chevron_icon = 'chevron-down' if is_expanded else 'chevron-right'
+            self.toggle_button.setIcon(QIcon(create_unicode_pixmap(chevron_icon, QSize(14, 14))))
             self.toggle_button.setChecked(is_expanded)

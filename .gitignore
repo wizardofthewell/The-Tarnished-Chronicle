@@ -191,3 +191,37 @@ assets/backup/
 
 # Claude settings
 .claude/
+
+# Debug/development files (prevent vibe-coded cruft)
+analyze_*.py
+calibrate_*.py
+check_*.py
+debug_*.py
+direct_*.py
+extract_*.py
+fetch_*.py
+find_*.py
+full_*.py
+parse_*.py
+scan_*.py
+search_*.py
+simple_*.py
+test_*.py
+verify_*.py
+*_test.py
+*_debug.py
+
+# Temp data files
+eventflag_bst.txt
+event_flag_bst_raw.txt
+launch.txt
+test_manifest.json
+*.tmp
+*.bak
+
+# Temp directories
+SavesTest/
+temp_ersm/
+update_test/
+temp/
+tmp/

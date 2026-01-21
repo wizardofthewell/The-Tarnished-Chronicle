@@ -9,6 +9,7 @@ from PySide6.QtGui import QIcon, QColor, QPixmap
 from PySide6.QtCore import Qt, QSize, Signal
 from ...utils import format_seconds_to_hms
 from ...utils import get_resource_path
+from .unicode_icons import create_unicode_pixmap
 
 class LocationSectionWidget(QFrame):
     boss_details_requested = Signal(dict)
@@ -43,7 +44,7 @@ class LocationSectionWidget(QFrame):
         self.expand_button = QPushButton()
         self.expand_button.setObjectName("expandButton")
         self.expand_button.setFixedSize(24, 24)
-        self.expand_button.setIcon(QIcon(get_resource_path("assets/icons/chevron-right.svg")))
+        self.expand_button.setIcon(QIcon(create_unicode_pixmap('chevron-right', QSize(16, 16))))
         self.location_icon_label = QLabel()
         self.location_icon_label.setObjectName("locationIcon")
         self.location_icon_label.setFixedSize(18, 18)
@@ -98,7 +99,7 @@ class LocationSectionWidget(QFrame):
 
             if boss_info.get("stats"):
                 details_label = QLabel()
-                details_label.setPixmap(QIcon(get_resource_path("assets/icons/eye.svg")).pixmap(QSize(16, 18)))
+                details_label.setPixmap(create_unicode_pixmap('eye', QSize(16, 18)))
                 details_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
                 details_label.setToolTip("Show boss details")
                 details_label.setCursor(Qt.CursorShape.PointingHandCursor)
@@ -106,13 +107,13 @@ class LocationSectionWidget(QFrame):
                 self.boss_table.setCellWidget(row, 3, details_label)
             elif any(keyword in boss_info.get("name", "") for keyword in ["Patches", "Mimic Tear", "Fia's Champions", "Stray Mimic Tear"]):
                 details_label = QLabel()
-                details_label.setPixmap(QIcon(get_resource_path("assets/icons/x-circle.svg")).pixmap(QSize(14, 18)))
+                details_label.setPixmap(create_unicode_pixmap('x-circle', QSize(14, 18)))
                 details_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
                 details_label.setToolTip("Stats not available for this boss")
                 self.boss_table.setCellWidget(row, 3, details_label)
 
             location_label = QLabel()
-            location_label.setPixmap(QIcon(get_resource_path("assets/icons/map-pin2.svg")).pixmap(QSize(14, 18)))
+            location_label.setPixmap(create_unicode_pixmap('map-pin', QSize(14, 18)))
             location_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
             location_label.setToolTip("Show on map (feature not implemented)")
             location_label.setCursor(Qt.CursorShape.PointingHandCursor)
@@ -135,8 +136,8 @@ class LocationSectionWidget(QFrame):
                 is_defeated = new_boss_info.get("is_defeated", False)
                 status_icon_label = self.boss_table.cellWidget(row, 1)
                 if status_icon_label:
-                    icon_path = get_resource_path("assets/icons/check.svg") if is_defeated else get_resource_path("assets/icons/x.svg")
-                    status_icon_label.setPixmap(QIcon(icon_path).pixmap(QSize(16, 16)))
+                    icon_name = 'check' if is_defeated else 'x'
+                    status_icon_label.setPixmap(create_unicode_pixmap(icon_name, QSize(16, 16)))
                 
                 timestamp_seconds = new_boss_info.get('timestamp')
                 timestamp_str = format_seconds_to_hms(timestamp_seconds) if timestamp_seconds is not None else ""
@@ -182,7 +183,8 @@ class LocationSectionWidget(QFrame):
         self.is_expanded = not self.is_expanded
         self.header_widget.setProperty("expanded", self.is_expanded)
         self.boss_table.setVisible(self.is_expanded)
-        self.expand_button.setIcon(QIcon(get_resource_path("assets/icons/chevron-down.svg")) if self.is_expanded else QIcon(get_resource_path("assets/icons/chevron-right.svg")))
+        chevron_icon = 'chevron-down' if self.is_expanded else 'chevron-right'
+        self.expand_button.setIcon(QIcon(create_unicode_pixmap(chevron_icon, QSize(16, 16))))
         self.header_widget.style().unpolish(self.header_widget)
         self.header_widget.style().polish(self.header_widget)
         self._update_table_height()

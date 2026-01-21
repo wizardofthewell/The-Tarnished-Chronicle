@@ -6,6 +6,7 @@ from PySide6.QtWidgets import (
 from PySide6.QtCore import Qt, QSize
 from PySide6.QtGui import QIcon
 from ...utils import get_resource_path
+from ..widgets.unicode_icons import create_unicode_pixmap
 
 class BossStatsDialog(QDialog):
     """
@@ -52,7 +53,7 @@ class BossStatsDialog(QDialog):
         weak_layout.setContentsMargins(8, 4, 8, 4)
         weak_widget.setStyleSheet("#weakLegend {border: 1px solid rgb(127, 204, 8); border-radius: 5px; padding: 5px;}")
         weak_icon = QLabel()
-        weak_icon.setPixmap(QIcon(get_resource_path("assets/icons/chevrons-down.svg")).pixmap(QSize(16, 16)))
+        weak_icon.setPixmap(create_unicode_pixmap('chevrons-down', QSize(16, 16)))
         weak_label = QLabel("Weakness")
         weak_layout.addWidget(weak_icon)
         weak_layout.addWidget(weak_label)
@@ -63,7 +64,7 @@ class BossStatsDialog(QDialog):
         strong_layout.setContentsMargins(8, 4, 8, 4)
         strong_widget.setStyleSheet("#strongLegend {border: 1px solid rgb(197, 7, 67); border-radius: 5px;}")
         strong_icon = QLabel()
-        strong_icon.setPixmap(QIcon(get_resource_path("assets/icons/chevrons-up.svg")).pixmap(QSize(16, 16)))
+        strong_icon.setPixmap(create_unicode_pixmap('chevrons-up', QSize(16, 16)))
         strong_label = QLabel("Strength")
         strong_layout.addWidget(strong_icon)
         strong_layout.addWidget(strong_label)
@@ -226,12 +227,12 @@ class BossStatsDialog(QDialog):
         indicator_label.setStyleSheet("background-color: transparent;")
 
         if name in weak_list:
-            indicator_label.setPixmap(QIcon(get_resource_path("assets/icons/chevrons-down.svg")).pixmap(QSize(16, 16)))
+            indicator_label.setPixmap(create_unicode_pixmap('chevrons-down', QSize(16, 16)))
             value_label.setStyleSheet("color: rgb(127, 204, 8); font-weight: bold; background-color: transparent;")
             row_widget.setStyleSheet("QWidget#rowWidget {background-color: rgba(127, 204, 8, 0.1); border-radius: 5px;}")
             row_widget.setObjectName("rowWidget")
         elif name in strong_list:
-            indicator_label.setPixmap(QIcon(get_resource_path("assets/icons/chevrons-up.svg")).pixmap(QSize(16, 16)))
+            indicator_label.setPixmap(create_unicode_pixmap('chevrons-up', QSize(16, 16)))
             value_label.setStyleSheet("color: rgb(197, 7, 67); font-weight: bold; background-color: transparent;")
             row_widget.setStyleSheet("QWidget#rowWidget {background-color: rgba(197, 7, 67, 0.1); border-radius: 5px;}")
             row_widget.setObjectName("rowWidget")

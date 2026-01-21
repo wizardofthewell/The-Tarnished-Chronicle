@@ -6,9 +6,9 @@
 
 !define APP_NAME "ER Boss Checklist"
 !define COMPANY_NAME "TheTarnishedChronicle"
-!define APP_VERSION "1.0.6"
-!define EXE_NAME "ER_Boss_Checklist.exe" ; Static EXE name
-!define ICON_FILE "assets\icons\app_logo.ico"
+!define APP_VERSION "2.0.0"
+!define EXE_NAME "ER_Boss_Checklist.exe"
+!define ICON_FILE "assets\icons\THE ELDEN SHOVEL.ico"
 !define OUTPUT_FILENAME "ER_Boss_Checklist_Setup.exe"
 
 ;--------------------------------
@@ -93,7 +93,7 @@ Section "!$(DESC_Core)" SEC_CORE
   ; Copy all files from the build directory
   File /r "${BUILD_DIR}\*"
   
-  ; Explicitly copy the icon into the install directory so shortcuts can use it
+  ; Copy the icon into the install directory for shortcuts
   File "${ICON_FILE}"
   
   ; Store installation folder
@@ -105,11 +105,11 @@ SectionEnd
 
 Section "$(DESC_StartMenuShortcut)" SEC_START_MENU
    CreateDirectory "$SMPROGRAMS\${APP_NAME}"
-   CreateShortCut "$SMPROGRAMS\${APP_NAME}\${APP_NAME}.lnk" "$INSTDIR\${EXE_NAME}" "" "$INSTDIR\app_logo.ico"
+   CreateShortCut "$SMPROGRAMS\${APP_NAME}\${APP_NAME}.lnk" "$INSTDIR\${EXE_NAME}" "" "$INSTDIR\THE ELDEN SHOVEL.ico"
 SectionEnd
 
 Section "$(DESC_DesktopShortcut)" SEC_DESKTOP
-   CreateShortCut "$DESKTOP\${APP_NAME}.lnk" "$INSTDIR\${EXE_NAME}" "" "$INSTDIR\app_logo.ico"
+   CreateShortCut "$DESKTOP\${APP_NAME}.lnk" "$INSTDIR\${EXE_NAME}" "" "$INSTDIR\THE ELDEN SHOVEL.ico"
 SectionEnd
 
 Section "Add/Remove Programs Entry"

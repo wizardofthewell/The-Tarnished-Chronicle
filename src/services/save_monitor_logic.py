@@ -4,7 +4,6 @@ import time
 import json
 import psutil # <--- NEW IMPORT
 from PySide6.QtCore import QObject, Signal, QTimer
-from .rust_cli_handler import RustCliHandler
 from ..domain.boss_data_manager import BossDataManager
 from ..config.app_config import DEFAULT_MONITORING_INTERVAL_SEC
 
@@ -15,9 +14,16 @@ class SaveMonitorLogic(QObject):
     boss_defeated = Signal(str, int)
     game_process_status = Signal(bool) # <--- NEW SIGNAL (is_running)
     
-    def __init__(self, rust_cli_handler: RustCliHandler, boss_data_manager: BossDataManager, parent=None):
+    def __init__(self, save_handler, boss_data_manager: BossDataManager, parent=None):
+        """
+        Args:
+            save_handler: Any handler with list_characters() and get_full_status() methods
+                         (RustCliHandler, HybridSaveHandler, or SaveParserHandler)
+            boss_data_manager: BossDataManager instance
+            parent: Parent QObject
+        """
         super().__init__(parent)
-        self.rust_cli = rust_cli_handler
+        self.rust_cli = save_handler  # Keep name for compatibility
         self.boss_data_manager = boss_data_manager
         
         self.monitoring_timer = QTimer(self)

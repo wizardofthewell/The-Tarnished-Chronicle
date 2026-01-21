@@ -29,7 +29,7 @@ from src.config.app_config import (
     DLC_BOSS_REFERENCE_FILENAME,
     LOCATION_PROGRESSION_ORDER
 )
-from src.services.rust_cli_handler import RustCliHandler
+from src.services.hybrid_save_handler import HybridSaveHandler
 from src.domain.boss_data_manager import BossDataManager
 from src.services.save_monitor_logic import SaveMonitorLogic
 from .managers.obs_manager import ObsManager
@@ -66,7 +66,7 @@ class BossChecklistApp(QWidget):
             base_filename=DEFAULT_BOSS_REFERENCE_FILENAME,
             dlc_filename=DLC_BOSS_REFERENCE_FILENAME
         )
-        self.rust_cli_handler = RustCliHandler(RUST_CLI_TOOL_PATH_PLACEHOLDER)
+        self.rust_cli_handler = HybridSaveHandler(RUST_CLI_TOOL_PATH_PLACEHOLDER)
         self.save_monitor_logic = SaveMonitorLogic(self.rust_cli_handler, self.boss_data_manager, self)
         self.timestamp_manager = TimestampManager()
         self.ui_timer = QTimer(self)

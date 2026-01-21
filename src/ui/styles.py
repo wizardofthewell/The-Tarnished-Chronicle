@@ -200,16 +200,20 @@ QPushButton#expandButton:hover {
     border-radius: 4px;
 }
 
-/* Styly pro samotný obrázek (indikátor) zůstávají stejné */
+/* Styly pro samotný obrázek (indikátor) - using native styling instead of missing SVGs */
 #locationCard QCheckBox::indicator {
-    width: 20px;  /* Můžete si pohrát s velikostí obrázku */
+    width: 20px;
     height: 20px;
+    border: 2px solid #4C566A;
+    border-radius: 4px;
+    background-color: #2E3440;
 }
 #locationCard QCheckBox::indicator:unchecked {
-    image: url(%%ICON_PATH%%/square.svg); /* Vidím, že používáš square, což je super! */
+    background-color: #2E3440;
 }
 #locationCard QCheckBox::indicator:checked {
-    image: url(%%ICON_PATH%%/check-square.svg);
+    background-color: #22c55e;
+    border-color: #22c55e;
 }
 /* QCheckBox::indicator:disabled {} - Ponecháno pro případné budoucí úpravy, pokud by bylo potřeba */
 
@@ -224,6 +228,19 @@ QPushButton#expandButton:hover {
 
 #hideDefeatedCheckbox:hover {
     background-color: #3B4252;
+}
+
+#hideDefeatedCheckbox::indicator {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #4C566A;
+    border-radius: 3px;
+    background-color: #2E3440;
+}
+
+#hideDefeatedCheckbox::indicator:checked {
+    background-color: #22c55e;
+    border-color: #22c55e;
 }
 
 /* Let the indicator use its default appearance */

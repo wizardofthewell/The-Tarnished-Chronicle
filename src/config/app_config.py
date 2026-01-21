@@ -1,13 +1,15 @@
 # src/app_config.py
 
-# Verze aplikace
-APP_VERSION = "1.0.6"
+# Application version
+APP_VERSION = "2.0.0"
 
-# URL k manifestu s nejnovější verzí "https://raw.githubusercontent.com/RysanekDavid/The-Tarnished-Chronicle/main/update_test/latest.json"
-MANIFEST_URL = "https://raw.githubusercontent.com/RysanekDavid/The-Tarnished-Chronicle/main/update_test/latest.json"
-# TEST_URL = "http://localhost:8000/test_manifest.json"
+# Update manifest URL - UPDATE THIS TO YOUR REPO
+# MANIFEST_URL = "https://raw.githubusercontent.com/WizardOfTheWell/The-Tarnished-Chronicle/main/latest.json"
+MANIFEST_URL = None  # Disable auto-update until you set up your release infrastructure
 
-# Asset Management for large image files
+# Asset Management for large image files (boss location images ~107MB)
+# These are downloaded at runtime from a separate repository
+# NOTE: This currently points to the original author's asset repo - consider forking if needed
 IMAGE_ASSETS_URL = "https://github.com/RysanekDavid/ER_checklist_assets/releases/download/v1.0.0/Bosses_locations.zip"
 APP_DATA_DIR = "TheTarnishedChronicle"
 

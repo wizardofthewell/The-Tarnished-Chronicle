@@ -3,10 +3,11 @@
 from PySide6.QtWidgets import (
     QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QComboBox, QFrame, QCheckBox
 )
-from PySide6.QtCore import Qt
-from PySide6.QtGui import QPixmap
+from PySide6.QtCore import Qt, QSize
+from PySide6.QtGui import QPixmap, QIcon, QColor
 from .widgets.icon_header import IconHeader
-from ..utils import get_resource_path
+from .widgets.unicode_icons import create_unicode_pixmap
+from ..utils import get_resource_path, create_colored_pixmap
 
 def create_file_slot_layout(parent_widget):
     main_v_layout = QVBoxLayout()
@@ -21,8 +22,8 @@ def create_file_slot_layout(parent_widget):
     
     # Success indicator icon (initially hidden)
     parent_widget.save_file_success_icon = QLabel()
-    success_pixmap = QPixmap(get_resource_path("assets/icons/check-circle.svg"))
-    parent_widget.save_file_success_icon.setPixmap(success_pixmap.scaled(20, 20, Qt.KeepAspectRatio, Qt.SmoothTransformation))
+    success_pixmap = create_colored_pixmap(get_resource_path("assets/icons/check-circle.svg"), QColor(34, 197, 94), QSize(20, 20))
+    parent_widget.save_file_success_icon.setPixmap(success_pixmap)
     parent_widget.save_file_success_icon.setFixedSize(20, 20)
     parent_widget.save_file_success_icon.setVisible(False)
     path_layout.addWidget(parent_widget.save_file_success_icon)
@@ -175,7 +176,7 @@ def create_obs_panel_layout(parent_widget):
     
     instructions_layout = QHBoxLayout()
     parent_widget.obs_instructions_button = QPushButton(" Show Setup Instructions")
-    parent_widget.obs_instructions_button.setIcon(QIcon(get_resource_path("assets/icons/info-circle-solid.svg")))
+    parent_widget.obs_instructions_button.setIcon(QIcon(create_unicode_pixmap('info-circle', QSize(16, 16))))
     parent_widget.obs_instructions_button.setObjectName("infoButton")
     instructions_layout.addWidget(parent_widget.obs_instructions_button)
     instructions_layout.addStretch()

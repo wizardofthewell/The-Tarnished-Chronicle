@@ -1,10 +1,10 @@
 # src/ui/widgets/empty_state_widget.py
 
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel
-from PySide6.QtGui import QPixmap
-from PySide6.QtCore import Qt
+from PySide6.QtGui import QPixmap, QColor
+from PySide6.QtCore import Qt, QSize
 
-from ...utils import get_resource_path
+from ...utils import get_resource_path, create_colored_pixmap
 
 class EmptyStateWidget(QWidget):
     """
@@ -19,11 +19,11 @@ class EmptyStateWidget(QWidget):
         layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout.setSpacing(20)
 
-        # Icon
+        # Icon (use create_colored_pixmap for Unicode fallback support)
         self.icon_label = QLabel()
         icon_path = get_resource_path("assets/icons/file-text.svg")
-        pixmap = QPixmap(icon_path)
-        self.icon_label.setPixmap(pixmap.scaled(48, 48, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation))
+        pixmap = create_colored_pixmap(icon_path, QColor(234, 179, 8), QSize(48, 48))
+        self.icon_label.setPixmap(pixmap)
         self.icon_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         
         # Title
@@ -51,10 +51,12 @@ class EmptyStateWidget(QWidget):
             state (str): Either 'select_file' or 'select_character'.
         """
         if state == "select_file":
-            self.icon_label.setPixmap(QPixmap(get_resource_path("assets/icons/file-text.svg")).scaled(48, 48, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation))
+            pixmap = create_colored_pixmap(get_resource_path("assets/icons/file-text.svg"), QColor(234, 179, 8), QSize(48, 48))
+            self.icon_label.setPixmap(pixmap)
             self.title_label.setText("Welcome to the ER Boss Checklist")
             self.instruction_label.setText("To get started, please select your Elden Ring save file (.sl2 for Vanilla or .co2 for Seamless Coop) using the left menu button.")
         elif state == "select_character":
-            self.icon_label.setPixmap(QPixmap(get_resource_path("assets/icons/user.svg")).scaled(48, 48, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation))
+            pixmap = create_colored_pixmap(get_resource_path("assets/icons/user.svg"), QColor(234, 179, 8), QSize(48, 48))
+            self.icon_label.setPixmap(pixmap)
             self.title_label.setText("Save File Loaded!")
             self.instruction_label.setText("Great! Now, please select a character from the dropdown list in the left menu to view their progress.") 
