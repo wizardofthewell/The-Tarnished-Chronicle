@@ -20,6 +20,16 @@ def get_resource_path(relative_path):
         # Dev environment: return normal file system path
         return relative_path
 
+
+def get_app_icon_path():
+    """Get the path to the application icon."""
+    if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
+        # Packaged app: icon is in the install directory
+        return os.path.join(sys._MEIPASS, 'assets', 'icons', 'THE ELDEN SHOVEL.ico')
+    else:
+        # Dev environment: return normal file system path
+        return os.path.join('assets', 'icons', 'THE ELDEN SHOVEL.ico')
+
 # Unicode fallback icons for when SVG files are missing
 UNICODE_ICONS = {
     'file-text': ('📄', '#eab308'),

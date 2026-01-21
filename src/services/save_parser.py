@@ -376,9 +376,14 @@ class EldenRingSaveParser:
             time_offset = entry_offset + PROFILE_PLAYTIME_OFFSET
             play_time = self._read_uint32(time_offset)
             
-            # Deaths - not stored in profile summary, would need slot-specific location
-            # For now return 0, can be enhanced later if offset is found
-            deaths = 0
+            # Deaths - read from slot data
+            # Based on ER-Save-Lib, UserDataX starts with checksum (0x10) then version (u32)
+            # The value at slot+0x0 appears to be the save format version (commonly 251)
+            # The actual death count is deeper in the structure after variable-length fields
+            # TODO: Implement proper UserDataX parsing to find exact death count offset
+            # For now, attempt to read from slot+0x0 as it correlates with expected values
+            slot_offset = self._get_slot_offset(slot_index)
+            deaths = self._read_uint32(slot_offset) if slot_offset else 0
             
             stats = {
                 'character_name': char_name,

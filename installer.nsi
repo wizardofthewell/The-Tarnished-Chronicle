@@ -10,6 +10,7 @@
 !define EXE_NAME "ER_Boss_Checklist.exe"
 !define ICON_FILE "assets\icons\THE ELDEN SHOVEL.ico"
 !define OUTPUT_FILENAME "ER_Boss_Checklist_Setup.exe"
+!define BUILD_DIR "dist\ER_Boss_Checklist"
 
 ;--------------------------------
 ; MUI2 Defines

@@ -225,3 +225,8 @@ temp_ersm/
 update_test/
 temp/
 tmp/
+
+# Build outputs
+ER_Boss_Checklist_Setup.exe
+*.exe
+!dist/**/*.exe

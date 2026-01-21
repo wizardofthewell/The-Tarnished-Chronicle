@@ -36,7 +36,7 @@ from .managers.obs_manager import ObsManager
 from src.domain.timestamp_manager import TimestampManager
 from src.services.update_checker import UpdateChecker
 from src.app_logic import AppLogic
-from src.utils import get_resource_path
+from src.utils import get_resource_path, get_app_icon_path
 import webbrowser
 
 class BossChecklistApp(QWidget):
@@ -44,7 +44,7 @@ class BossChecklistApp(QWidget):
         super().__init__()
         self.setWindowTitle("The Tarnished's Chronicle")
         self.setGeometry(600, 200, 1000, 900)
-        self.setWindowIcon(QIcon(get_resource_path("assets/icons/app_logo.ico")))
+        self.setWindowIcon(QIcon(get_app_icon_path()))
 
         self._init_managers()
         self.app_logic = AppLogic(self)
