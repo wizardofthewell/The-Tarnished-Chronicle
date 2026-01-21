@@ -1,16 +1,12 @@
-# 🏰 The Tarnished's Chronicle
+# The Tarnished's Chronicle
 
-<div align="center">
-
-**The ultimate boss tracking companion for Elden Ring**
+**Boss tracking companion for Elden Ring**
 
 [![License](https://img.shields.io/github/license/WizardOfTheWell/The-Tarnished-Chronicle?style=for-the-badge)](LICENSE)
 
-</div>
-
 ---
 
-## 📖 About
+## About
 
 **The Tarnished's Chronicle** is a desktop application for Windows that tracks your boss completion progress in Elden Ring. It monitors your save file in real-time and provides a clean interface to see which bosses you've defeated.
 
@@ -21,74 +17,105 @@ This is a fork of the original project by [RysanekDavid](https://github.com/Rysa
 - **Working UI icons** - Unicode-based fallbacks eliminate missing asset errors
 - **Cleaner codebase** - Removed debug files and test cruft
 
-### ✨ Key Features
+### Key Features
 
-- **🎯 Real-time Boss Tracking** - Automatically detects defeated bosses by monitoring your save file
-- **📍 Location-based Organization** - Bosses organized by game areas with progression indicators
-- **⚔️ Comprehensive Coverage** - Includes both base game and Shadow of the Erdtree DLC bosses
-- **📊 Detailed Statistics** - Track playtime and completion percentages
-- **🎮 Live Overlay** - In-game overlay showing your current progress
-- **📹 OBS Integration** - Export stats to text files for streaming setups
-- **🔗 Seamless Coop Support** - Compatible with both Vanilla (.sl2) and Seamless Coop Mod (.co2) save files
+- **Real-time Boss Tracking** - Automatically detects defeated bosses by monitoring your save file
+- **Location-based Organization** - Bosses organized by game areas with progression indicators
+- **Comprehensive Coverage** - Includes both base game and Shadow of the Erdtree DLC bosses
+- **Detailed Statistics** - Track playtime and completion percentages
+- **Live Overlay** - In-game overlay showing your current progress
+- **OBS Integration** - Export stats to text files for streaming setups
+- **Seamless Coop Support** - Compatible with both Vanilla (.sl2) and Seamless Coop Mod (.co2) save files
 
 ---
 
-## 🚀 Quick Start
+## Installation
 
-### Running from Source
+### Option 1: Download Release (Recommended)
 
-1. **Clone the repository**
+1. Go to the [Releases](https://github.com/WizardOfTheWell/The-Tarnished-Chronicle/releases) page
+2. Download `ER_Boss_Checklist_Setup.exe` from the latest release
+3. Run the installer and follow the prompts
+4. Launch from the Start Menu or Desktop shortcut
+
+### Option 2: Build from Source
+
+**Requirements:**
+- Python 3.10 or higher
+- Git
+
+**Steps:**
+
+1. Clone the repository
    ```bash
    git clone https://github.com/WizardOfTheWell/The-Tarnished-Chronicle.git
    cd The-Tarnished-Chronicle
    ```
 
-2. **Create virtual environment and install dependencies**
+2. Create virtual environment and install dependencies
    ```bash
    python -m venv .venv
    .venv\Scripts\activate
    pip install -r requirements.txt
    ```
 
-3. **Run the application**
+3. Run the application
    ```bash
    python -m src.main
    ```
 
-### First Setup
+**Building the Installer:**
+
+To create a distributable installer:
+
+```bash
+# Install build tools
+pip install pyinstaller
+
+# Build executable
+pyinstaller --clean build.spec
+
+# Create installer (requires NSIS - https://nsis.sourceforge.io/)
+makensis installer.nsi
+```
+
+The installer will be created as `ER_Boss_Checklist_Setup.exe`.
+
+---
+
+## First Setup
 
 1. **Select Save File** - Browse to your Elden Ring save file:
-   - **Vanilla Elden Ring**: `%APPDATA%\EldenRing\[Steam_ID]\ER0000.sl2`
-   - **Seamless Coop Mod**: `%APPDATA%\EldenRing\[Steam_ID]\ER0000.co2`
+   - Vanilla Elden Ring: `%APPDATA%\EldenRing\[Steam_ID]\ER0000.sl2`
+   - Seamless Coop Mod: `%APPDATA%\EldenRing\[Steam_ID]\ER0000.co2`
 2. **Choose Character** - Select which character slot you want to track
-3. **Start Playing** - The app will automatically monitor your progress!
+3. **Start Playing** - The app will automatically monitor your progress
 
 ---
 
-## 📋 Features
+## Features
 
-### 🎯 Boss Tracking
+### Boss Tracking
 
-- **Automatic Detection**: Monitors your save file for newly defeated bosses
-- **Organized by Location**: Bosses grouped by game region
-- **Progress Indicators**: See completion percentage per area
+- Automatic detection of defeated bosses by monitoring your save file
+- Bosses grouped by game region
+- Completion percentage per area
 
-### 🎮 Live Overlay
+### Live Overlay
 
-- **Customizable Display**: Show/hide different stats
-- **Color Customization**: Choose your preferred text color
-- **Font Size Options**: Adjust overlay text size
-- **Always on Top**: Overlay stays visible while gaming
+- Customizable display with show/hide options
+- Color and font size customization
+- Always-on-top mode for visibility while gaming
 
-### 📹 OBS Integration
+### OBS Integration
 
-- **Text File Export**: Exports stats to `.txt` files for OBS text sources
-- **Customizable Formats**: Define your own text formats for each stat
-- **Real-time Updates**: Files update automatically as you play
+- Exports stats to text files for OBS text sources
+- Customizable text formats
+- Real-time updates as you play
 
 ---
 
-## 💻 System Requirements
+## System Requirements
 
 - **OS**: Windows 10/11 (64-bit)
 - **Python**: 3.10+ (for running from source)
@@ -96,14 +123,14 @@ This is a fork of the original project by [RysanekDavid](https://github.com/Rysa
 
 ---
 
-## 🐛 Known Issues
+## Known Issues
 
-- Death counter reads as 0 (death offset location TBD)
+- Death counter may show incorrect values (save format research ongoing)
 - Some sidebar icons display as Unicode symbols (cosmetic only)
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
@@ -112,11 +139,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Original Author**: [RysanekDavid](https://github.com/RysanekDavid) (Davosso)
 - **Fork Maintainer**: [WizardOfTheWell](https://github.com/WizardOfTheWell)
 - **FromSoftware** - For creating Elden Ring
-
----
-
-<div align="center">
-
-**Made with ❤️ for the Elden Ring community**
-
-</div>
