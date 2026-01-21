@@ -13,7 +13,7 @@
 This is a fork of the original project by [RysanekDavid](https://github.com/RysanekDavid/The-Tarnished-Chronicle), with significant bug fixes and improvements including:
 
 - **Pure Python save file parsing** - No longer requires the external Rust CLI tool
-- **Fixed boss tracking** - Correct event flag offsets for accurate boss status detection  
+- **Fixed boss tracking** - Correct event flag offsets for accurate boss status detection
 - **Working UI icons** - Unicode-based fallbacks eliminate missing asset errors
 - **Cleaner codebase** - Removed debug files and test cruft
 
@@ -41,25 +41,27 @@ This is a fork of the original project by [RysanekDavid](https://github.com/Rysa
 ### Option 2: Build from Source
 
 **Requirements:**
+
 - Python 3.10 or higher
 - Git
 
 **Steps:**
 
 1. Clone the repository
+
    ```bash
    git clone https://github.com/WizardOfTheWell/The-Tarnished-Chronicle.git
    cd The-Tarnished-Chronicle
    ```
-
 2. Create virtual environment and install dependencies
+
    ```bash
    python -m venv .venv
    .venv\Scripts\activate
    pip install -r requirements.txt
    ```
-
 3. Run the application
+
    ```bash
    python -m src.main
    ```
