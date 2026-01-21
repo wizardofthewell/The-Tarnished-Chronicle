@@ -31,7 +31,7 @@ MANIFEST
 #  Usually these files are written by a PyInstaller script; this is targeted
 #  at PyInstaller default files in development mode.
 *.manifest
-*.spec
+# *.spec  # Keep build.spec for CI/CD
 
 # Installer logs
 pip-log.txt
