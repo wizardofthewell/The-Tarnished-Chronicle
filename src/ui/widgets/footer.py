@@ -29,7 +29,7 @@ class FooterWidget(QFrame):
 
         layout.addWidget(QLabel(" | ", objectName="creditLabel"))
 
-        credit_label = QLabel('Made with <span style="color: #ff0000;">♥</span> by <a href="https://github.com/RysanekDavid" style="color: #5B90C5;">Davosso</a>')
+        credit_label = QLabel('Made with <span style="color: #ff0000;">&#9829;</span> by <a href="https://github.com/RysanekDavid" style="color: #5B90C5;">Davosso</a> & <a href="https://github.com/WizardOfTheWell" style="color: #5B90C5;">WizardOfTheWell</a>')
         credit_label.setObjectName("creditLabel")
         credit_label.setOpenExternalLinks(True)
         layout.addWidget(credit_label)
