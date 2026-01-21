@@ -155,7 +155,7 @@ $RECYCLE.BIN/
 .LSOverride
 .Spotlight-V100
 .Trashes
-Icon?
+# Icon? pattern removed - was blocking .ico files
 ._*
 
 # Linux
