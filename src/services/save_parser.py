@@ -99,10 +99,18 @@ def get_event_flag_block_map() -> Dict[int, int]:
     return _EVENT_FLAG_BLOCK_MAP
 
 # Save file structure offsets (for PC version)
-SAVE_HEADER_SIZE = 0x30C  # Header with checksum and magic
-SLOT_SIZE = 0x280010  # Size of each character slot
+# Based on BND4 file structure analysis with ER-Save-Lib
+SAVE_HEADER_SIZE = 0x300  # BND4 magic (4) + header (0x2FC)
+SLOT_SIZE = 0x280010  # Size of each character slot data
 
-# Profile summary is at a FIXED location in the file (not per-slot)
+# Slot start offsets (from BND4 file headers)
+# Each slot is stored as a separate file within the BND4 archive
+# Slots are at: 0x300, 0x280310, 0x500320, 0x780330, etc.
+SLOT_BASE_OFFSET = 0x300  # First slot starts at 0x300
+SLOT_INCREMENT = 0x280010  # Base slot size
+SLOT_GAP = 0x10  # Gap between slots increases by 0x10 per slot
+
+# Profile summary is at a FIXED location in the file (UserData10 section)
 PROFILE_SUMMARY_BASE = 0x1901D00  # Base offset for profile summary section
 PROFILE_ENTRY_SIZE = 0x24C  # 588 bytes per profile entry
 
@@ -113,7 +121,7 @@ PROFILE_PLAYTIME_OFFSET = 0x34  # Play time in seconds (4 bytes, little-endian)
 
 # Event flags configuration  
 EVENT_FLAGS_SIZE = 0x1BF99F  # Event flags section size (~1.83MB per slot)
-EVENT_FLAGS_SLOT_OFFSET = 0x389F8  # Offset of event flags within each character slot
+EVENT_FLAGS_SLOT_OFFSET = 0x388FC  # Offset of event flags within each character slot (verified)
 
 
 class EldenRingSaveParser:
@@ -170,12 +178,21 @@ class EldenRingSaveParser:
         return event_flags_base
     
     def _get_slot_offset(self, slot_index: int) -> int:
-        """Calculate the byte offset for a character slot."""
-        # PC save structure: Header at 0x310, then character slots
-        # Each slot is SLOT_SIZE (0x280010) bytes
-        # Slots are numbered 0-9 for up to 10 characters
-        base_offset = 0x310  # After checksum and header
-        return base_offset + (slot_index * SLOT_SIZE)
+        """
+        Calculate the byte offset for a character slot.
+        
+        The save file is a BND4 archive containing internal files.
+        Slot offsets from BND4 file headers:
+        - Slot 0: 0x300
+        - Slot 1: 0x280310
+        - Slot 2: 0x500320
+        - Slot 3: 0x780330
+        - etc.
+        
+        Pattern: 0x300 + (slot_index * 0x280010)
+        Each slot is exactly 0x280010 bytes apart.
+        """
+        return SLOT_BASE_OFFSET + (slot_index * SLOT_INCREMENT)
     
     def _read_utf16_string(self, offset: int, max_length: int = 32) -> str:
         """Read a null-terminated UTF-16LE string from the save data."""
@@ -461,13 +478,14 @@ class SaveParserHandler:
         """
         Get full character status including stats and boss flags.
         Compatible with RustCliHandler interface.
+        
+        Always reloads the file to ensure fresh data for live monitoring.
         """
-        # Load file if needed  
-        if self._current_file != save_file_path:
-            success, err = self._parser.load_file(save_file_path)
-            if not success:
-                return None, err
-            self._current_file = save_file_path
+        # Always reload the file to get fresh data during live monitoring
+        success, err = self._parser.load_file(save_file_path)
+        if not success:
+            return None, err
+        self._current_file = save_file_path
         
         return self._parser.get_full_status(slot_index, event_ids)
 
