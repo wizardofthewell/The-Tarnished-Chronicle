@@ -1,7 +1,7 @@
 # src/app_config.py
 
 # Application version
-APP_VERSION = "2.0.0"
+APP_VERSION = "2.0.1"
 
 # Update manifest URL - UPDATE THIS TO YOUR REPO
 # MANIFEST_URL = "https://raw.githubusercontent.com/WizardOfTheWell/The-Tarnished-Chronicle/main/latest.json"

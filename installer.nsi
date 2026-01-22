@@ -6,7 +6,7 @@
 
 !define APP_NAME "ER Boss Checklist"
 !define COMPANY_NAME "TheTarnishedChronicle"
-!define APP_VERSION "2.0.0"
+!define APP_VERSION "2.0.1"
 !define EXE_NAME "ER_Boss_Checklist.exe"
 !define ICON_FILE "assets\icons\THE ELDEN SHOVEL.ico"
 !define OUTPUT_FILENAME "ER_Boss_Checklist_Setup.exe"
